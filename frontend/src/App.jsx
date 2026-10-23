@@ -10,8 +10,8 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      // Intenta consultar /api/status
-      const response = await fetch('/api/status')
+      // Petición al backend en /backend_app/status
+      const response = await fetch('/backend_app/status')
       if (!response.ok) {
         throw new Error(`Error HTTP: ${response.status} ${response.statusText}`)
       }
@@ -29,22 +29,22 @@ function App() {
     <div className="container">
       <header className="header">
         <div className="badges">
-          <span className="badge badge-react">⚛️ React</span>
+          <span className="badge badge-react">⚛️ React (/frontend_app)</span>
           <span className="badge-plus">+</span>
-          <span className="badge badge-node">🟢 Node.js</span>
+          <span className="badge badge-node">🟢 Node.js (/backend_app)</span>
           <span className="badge-plus">+</span>
           <span className="badge badge-cpanel">🟧 cPanel</span>
         </div>
         <h1>¡Hola Mundo!</h1>
         <p className="subtitle">
-          Aplicación Fullstack lista para desplegar en cPanel con GitHub Actions
+          Frontend alojado en <code>public_html/frontend_app</code> y Backend en <code>/backend_app</code>
         </p>
       </header>
 
       <main className="card">
         <h2>Prueba de Conexión Frontend &rarr; Backend</h2>
         <p className="description">
-          Haz clic en el siguiente botón para enviar una petición HTTP al servidor Node.js (Express).
+          Haz clic en el siguiente botón para enviar una petición HTTP a <code>/backend_app/status</code>.
         </p>
 
         <button 
@@ -59,7 +59,7 @@ function App() {
           <div className="alert alert-error">
             <strong>❌ Error de conexión:</strong> {error}
             <p className="hint">
-              Asegúrate de que el backend de Node.js esté corriendo (en local en el puerto 3000 o configurado en cPanel Application Manager).
+              Verifica que el backend esté ejecutándose en <code>/backend_app</code>.
             </p>
           </div>
         )}
@@ -73,7 +73,7 @@ function App() {
       </main>
 
       <footer className="footer">
-        <p>Proyecto base para <strong>companiarapitransec.com</strong></p>
+        <p>Proyecto para <strong>companiarapitransec.com</strong></p>
       </footer>
     </div>
   )
