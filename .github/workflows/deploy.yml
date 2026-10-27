@@ -17,6 +17,13 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
+      - name: Instalar dependencias de producción del Backend
+        run: |
+          cd backend
+          npm ci --omit=dev
+          mkdir -p tmp
+          touch tmp/restart.txt
+
       - name: Subir archivos del Backend por FTP a ~/backend
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -28,19 +35,6 @@ jobs:
           exclude: |
             **/.git*
             **/.git*/**
-            **/node_modules/**
-
-      - name: Instalar dependencias en cPanel y reiniciar Passenger
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.CPANEL_HOST }}
-          username: ${{ secrets.CPANEL_USER }}
-          password: ${{ secrets.CPANEL_PASSWORD }}
-          script: |
-            cd ~/backend
-            npm install --production
-            mkdir -p tmp
-            touch tmp/restart.txt
 
   # ==========================================
   # 2. DESPLIEGUE DEL FRONTEND (React) -> public_html/frontend
