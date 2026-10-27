@@ -8,7 +8,7 @@ on:
 
 jobs:
   # ==========================================
-  # 1. DESPLIEGUE DEL BACKEND (Node.js) -> /backend_app
+  # 1. DESPLIEGUE DEL BACKEND (Node.js) -> /backend
   # ==========================================
   deploy-backend:
     name: Desplegar Backend Node.js
@@ -17,14 +17,14 @@ jobs:
       - name: Descargar repositorio
         uses: actions/checkout@v4
 
-      - name: Subir archivos del Backend por FTP a ~/backend_app
+      - name: Subir archivos del Backend por FTP a ~/backend
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.CPANEL_HOST }}
           username: ${{ secrets.CPANEL_USER }}
           password: ${{ secrets.CPANEL_PASSWORD }}
           local-dir: ./backend/
-          server-dir: ./backend_app/
+          server-dir: ./backend/
           exclude: |
             **/.git*
             **/.git*/**
@@ -37,13 +37,13 @@ jobs:
           username: ${{ secrets.CPANEL_USER }}
           password: ${{ secrets.CPANEL_PASSWORD }}
           script: |
-            cd ~/backend_app
+            cd ~/backend
             npm install --production
             mkdir -p tmp
             touch tmp/restart.txt
 
   # ==========================================
-  # 2. DESPLIEGUE DEL FRONTEND (React) -> public_html/frontend_app
+  # 2. DESPLIEGUE DEL FRONTEND (React) -> public_html/frontend
   # ==========================================
   deploy-frontend:
     name: Desplegar Frontend React
@@ -65,11 +65,11 @@ jobs:
           npm ci
           npm run build
 
-      - name: Subir Frontend a public_html/frontend_app
+      - name: Subir Frontend a public_html/frontend
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.CPANEL_HOST }}
           username: ${{ secrets.CPANEL_USER }}
           password: ${{ secrets.CPANEL_PASSWORD }}
           local-dir: ./frontend/dist/
-          server-dir: ./public_html/frontend_app/
+          server-dir: ./public_html/frontend/

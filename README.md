@@ -1,26 +1,27 @@
 # Proyecto Fullstack React + Node.js (cPanel & GitHub Actions)
 
 Este repositorio contiene una aplicación Hola Mundo fullstack configurada para desplegar:
-- **Backend:** En la ruta `/backend_app` (Nombre en cPanel: `api`)
-- **Frontend:** En `public_html/frontend_app`
+- **Backend:** En la ruta `/backend` (Nombre en cPanel: `backend`)
+- **Frontend:** En `public_html/frontend`
 
 ## Estructura de URLs
 
-* **Frontend:** `https://companiarapitransec.com/frontend_app/`
-* **Backend:** `https://companiarapitransec.com/backend_app/`
+* **Frontend:** `https://companiarapitransec.com/frontend/`
+* **Backend:** `https://companiarapitransec.com/backend/`
 
 ---
 
 ## 1. Configuración en cPanel (Application Manager)
 
-En cPanel > **Application Manager** > **Register Application**:
-- **Application Name**: `api`
+En cPanel > **Application Manager** > **Register Application** (o Edit):
+- **Application Name**: `backend`
 - **Deployment Domain**: `companiarapitransec.com`
-- **Base Application URL**: `/` seguido de `backend_app`
-- **Application Path**: `backend_app`
+- **Base Application URL**: `backend`
+- **Application Path**: `backend`
+- **Application Startup File**: `app.js`
 - **Deployment Environment**: `Production`
 
-Haz clic en **Save** o **Register Application**.
+Haz clic en **Save** o **Update Application**.
 
 ---
 
